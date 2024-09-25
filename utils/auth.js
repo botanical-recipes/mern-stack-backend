@@ -8,11 +8,13 @@ const auth = async (req, res, next) => {
     return next();
   }
 
-  // const token = await req.headers.authorization.split(" ")[1]
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQGFwcGxlLmNvbSIsImlhdCI6MTcyNzI0MzExMCwiZXhwIjoxNzI3MzI1OTEwfQ.zU9095QEgB4JiKvfZGleYnqVEs0CPNTi9XCYVPO0hJI";
+  const token = await req.headers.authorization.split(" ")[1]
+  // const token = await req.headers.authorization
+
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQGFwcGxlLmNvbSIsImlhdCI6MTcyNzI0MzExMCwiZXhwIjoxNzI3MzI1OTEwfQ.zU9095QEgB4JiKvfZGleYnqVEs0CPNTi9XCYVPO0hJI";
 
   if(!token) {
-    return res.status(400).json({message: "トークンがありません"});
+    return res.status(401).json({message: "トークンがありません"});
   }
 
   try{
