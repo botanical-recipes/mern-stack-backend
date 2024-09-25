@@ -48,6 +48,7 @@ app.get("/item/:id", async (req, res) => {
 });
 //Update Item
 app.put("/item/update/:id", auth, async (req, res) => {
+ 
   try {
     await connectDB();
     const singleItem = await ItemModel.findById(req.params.id);
@@ -85,7 +86,7 @@ app.post("/user/register", async (req, res) => {
     await connectDB();
     await UserModel.create(req.body);
     return res.status(200).json({ message: "ユーザー登録成功" });
-  } catch {
+  } catch{
     return res.status(400).json({ message: "ユーザー登録失敗" });
   }
 })
@@ -114,6 +115,7 @@ app.post("/user/login", async (req, res) => {
   }
 });
 
+//Connecting to port
 const port = process.env.PORT || 5050;
 
 app.listen(port, () => {

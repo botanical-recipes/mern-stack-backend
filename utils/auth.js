@@ -8,8 +8,8 @@ const auth = async (req, res, next) => {
     return next();
   }
 
-  // const token = await req.headers.authorization.split(" ")[1];
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQG1vbm90ZWluLmNvbSIsImlhdCI6MTcyNTcwMzc5NiwiZXhwIjoxNzI1Nzg2NTk2fQ.-ELnN_ZeavAFbBWN03NaS0hjT8QD4rQsgcuoP8hmpNg";
+  // const token = await req.headers.authorization.split(" ")[1]
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQGFwcGxlLmNvbSIsImlhdCI6MTcyNzI0MzExMCwiZXhwIjoxNzI3MzI1OTEwfQ.zU9095QEgB4JiKvfZGleYnqVEs0CPNTi9XCYVPO0hJI";
 
   if(!token) {
     return res.status(400).json({message: "トークンがありません"});
@@ -18,7 +18,7 @@ const auth = async (req, res, next) => {
   try{
     const decoded = jwt.verify(token, secret_key);
     req.body.email = decoded.email;
-    next();
+    return next();
   }catch(err){
     return res.status(400).json({message: "トークンが正しくないので、ログインして下さい"});
   }
